@@ -143,8 +143,8 @@ def handle_size_callback(call: CallbackQuery):
             respon = "DROPLET INFORMATION\n"
             respon += f"Name: {droplet_info['name']}\n"
             respon += f"ID: {droplet_info['id']}\n"
-            respon += f"Public IP: {droplet_info['ip_address']}"
-            bot.send_message(chat_id, respon)
+            respon += f"Public IP: `{droplet_info['ip_address']}`"
+            bot.send_message(chat_id, respon, parse_mode="MarkdownV2")
         else:
             bot.send_message(chat_id, 'Failed to retrieve droplet information.')
     else:
