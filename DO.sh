@@ -135,21 +135,23 @@ def handle_size_callback(call: CallbackQuery):
     
     response = requests.post(DO_DROPLET_URL, json=data, headers=headers)
     
-    if response.status_code == 202:
+   if response.status_code == 202:
         bot.send_message(chat_id, 'Droplet created successfully! Waiting 60 seconds to fetch information...')
         time.sleep(60)
         droplet_info = get_droplet_info(response.json()['droplet']['id'])
         if droplet_info:
-            respon = "DROPLET INFORMATION\n"
-            respon += f"Name: {droplet_info['name']}\n"
-            respon += f"ID: {droplet_info['id']}\n"
-            respon += f"Public IP: `{droplet_info['ip_address']}`"
-            bot.send_message(chat_id, respon, parse_mode="MarkdownV2")
+            bot.send_message(
+                 chat_id, 
+                 f"DROOLET INFORMATION\n"
+                 f"Name : {droplet_info['name']}\n"
+                 f"ID: {droplet_info['id']}\n"
+                 f"Public IP: `{droplet_info['ip_address']}`", 
+                 parse_mode="MarkdownV2"
+            )      
         else:
             bot.send_message(chat_id, 'Failed to retrieve droplet information.')
     else:
         bot.send_message(chat_id, 'Failed to create droplet. Please try again.')
-
 def get_droplet_info(droplet_id):
     droplet_info_url = f"{DO_DROPLET_URL}/{droplet_id}"
     headers = {
