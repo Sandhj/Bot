@@ -152,6 +152,7 @@ def handle_size_callback(call: CallbackQuery):
             bot.send_message(chat_id, 'Failed to retrieve droplet information.')
     else:
         bot.send_message(chat_id, 'Failed to create droplet. Please try again.')
+        
 def get_droplet_info(droplet_id):
     droplet_info_url = f"{DO_DROPLET_URL}/{droplet_id}"
     headers = {
